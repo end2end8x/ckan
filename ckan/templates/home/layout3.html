@@ -1,23 +1,48 @@
+{% set groups = h.get_featured_groups(20) %}
+{% set organizations = h.get_featured_organizations(20) %}
+
 <div role="main" class="hero">
   <div class="container">
     {% block search %}
       {% snippet 'home/snippets/search.html' %}
     {% endblock %}
   </div>
-</div>
-<div role="main">
   <div class="container">
-    <div class="row row2">
-      <div class="col-md-6 col2">
-        {% block promoted %}
-          {% snippet 'home/snippets/promoted.html' %}
-        {% endblock %}
-      </div>
-      <div class="col-md-6 col1">
-        {% block stats %}
-          {% snippet 'home/snippets/stats.html' %}
-        {% endblock %}
-      </div>
-    </div>
+    {% block stats %}
+      {% snippet 'home/snippets/stats.html' %}
+    {% endblock %}
+  </div>
+  <div class="container">
+    {% block group_list %}
+    <ul class="media-grid" data-module="media-grid">
+      {% block group_list_inner %}
+      {% for group in groups %}
+        {% snippet "group/snippets/group_item.html", group=group, position=loop.index %}
+      {% endfor %}
+      {% endblock %}
+    </ul>
+    {% endblock %}
+  </div>
+  <div class="container">
+    {% block organization_list %}
+    <ul class="media-grid" data-module="media-grid">
+      {% block organization_list_inner %}
+      {% for organization in organizations %}
+        {% snippet "organization/snippets/organization_item.html", organization=organization, position=loop.index, show_capacity=show_capacity %}
+      {% endfor %}
+      {% endblock %}
+    </ul>
+    {% endblock %}
+  </div>
+  <div class="container">
+    {% block featured_organization %}
+      {% snippet 'home/snippets/featured_organization.html' %}
+    {% endblock %}
+  </div>
+  <div class="container">
+    {% block featured_group %}
+      {% snippet 'home/snippets/featured_group.html' %}
+    {% endblock %}
   </div>
 </div>
+
