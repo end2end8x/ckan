@@ -23,8 +23,8 @@ class SearchError(Exception):
 class SearchQueryError(SearchError):
     pass
 
+
 DEFAULT_SOLR_URL = 'http://127.0.0.1:8983/solr'
-# DEFAULT_SOLR_URL = 'http://157.245.51.117:8983/solr'
 
 
 class SolrSettings(object):
